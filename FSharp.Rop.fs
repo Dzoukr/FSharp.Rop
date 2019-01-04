@@ -61,8 +61,6 @@ module Result =
     let traverse f list =
         let retn = Result.Ok
         let cons head tail = head :: tail
-        let (<*>) = apply
-
         let init = retn []
         let folder (head:'a) (tail:Result<'b list,'c>) = 
             apply (apply (retn cons) (f head)) tail
