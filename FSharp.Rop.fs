@@ -13,20 +13,20 @@ module Result =
         | Error e -> Error e
     
     let fold results =
-        let foldFn item acc =
+        let foldFn acc item =
             match acc, item with
             | Error e, _ | _, Error e -> Error e
             | Ok l, Ok v -> v :: l |> Ok
-        List.foldBack foldFn results (Ok [])
+        List.fold foldFn (Ok []) results
 
     let foldAll results =
-        let foldFn item acc =
+        let foldFn acc item =
             match acc, item with
             | Error ae, Error ie -> ie :: ae |> List.rev |> Error
             | Error e, Ok _ -> Error e
             | Ok _, Error ie -> ie |> List.singleton |> Error 
             | Ok l, Ok v -> v :: l |> Ok
-        List.foldBack foldFn results (Ok [])
+        List.fold foldFn (Ok []) results |> Result.map List.rev
 
     let isOk = function
         | Ok _ -> true
@@ -62,9 +62,10 @@ module Result =
         let retn = Result.Ok
         let cons head tail = head :: tail
         let init = retn []
-        let folder (head:'a) (tail:Result<'b list,'c>) = 
+        let folder (tail:Result<'b list,'c>) (head:'a) = 
+            printf "%A" head
             apply (apply (retn cons) (f head)) tail
-        List.foldBack folder list init
+        List.fold folder init list |> Result.map List.rev
 
     let log (fn:Result<'a,'b> -> unit) result =
         result |> fn
