@@ -63,7 +63,6 @@ module Result =
         let cons head tail = head :: tail
         let init = retn []
         let folder (tail:Result<'b list,'c>) (head:'a) = 
-            printf "%A" head
             apply (apply (retn cons) (f head)) tail
         List.fold folder init list |> Result.map List.rev
 
