@@ -42,6 +42,11 @@ module Result =
         | Some v -> Ok v
         | None -> Error defError
 
+    let liftOption defError = function
+        | Ok (Some v) -> Ok v
+        | Ok (None) -> Error defError
+        | Error err -> Error err
+
     let withDefault def = function
         | Ok v -> v
         | Error _ -> def
