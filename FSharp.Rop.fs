@@ -75,6 +75,13 @@ module Result =
         result |> fn
         result
 
+    module Operators =
+        // custom operators
+        let (>>=) result f = Result.bind f result
+        let (>=>) f g a = f a >>= g
+        let (<!>) result f = Result.map f result
+        let (<*>) = apply
+
 // computation expression
 type ResultBuilder() = 
     member __.Zero() = Ok()
@@ -111,8 +118,3 @@ type ResultBuilder() =
                 x.Delay(fun () -> body enum.Current)))
 
 let result = ResultBuilder()
-
-// custom operators
-let (>>=) result f = Result.bind f result
-let (<!>) result f = Result.map f result
-let (<*>) = Result.apply
