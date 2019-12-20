@@ -1,4 +1,4 @@
-module FSharp.Rop
+module FSharp.Rop.Result
 
 [<RequireQualifiedAccess>]
 module Result =
