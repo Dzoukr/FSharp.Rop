@@ -1,6 +1,6 @@
 module FSharp.Rop
 
-// basic module extension
+[<RequireQualifiedAccess>]
 module Result =
     let bind2 f x y = 
         match x, y with

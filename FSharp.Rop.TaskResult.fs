@@ -3,6 +3,7 @@
 open System.Threading.Tasks
 open FSharp.Control.Tasks
 
+[<RequireQualifiedAccess>]
 module TaskResult =
     
     let ofTaskAndResult (fn:'a -> Task<'b>) (res:Result<'a, _>) =
