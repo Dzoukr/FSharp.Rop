@@ -5,6 +5,15 @@ open FSharp.Control.Tasks
 
 module TaskResult =
     
+    let ofTaskAndResult (fn:'a -> Task<'b>) (res:Result<'a, _>) =
+        task {
+            match res with
+            | Ok a ->
+                let! r = fn a
+                return Ok r
+            | Error e -> return Error e
+        }
+
     let bind (f:'a -> Task<Result<'b,_>>) (result:Task<Result<'a,_>>) = 
         task {
             match! result with
