@@ -44,6 +44,6 @@ module TaskResult =
         }
 
 module Operators =
-    let (>>=) result f = bind f result
-    let (<!>) result f = bind (f >> Ok >> Task.FromResult) result
-    let (<*>) = apply
+    let (>>=) result f = TaskResult.bind f result
+    let (<!>) result f = TaskResult.bind (f >> Ok >> Task.FromResult) result
+    let (<*>) = TaskResult.apply

@@ -80,7 +80,7 @@ module Operators =
     let (>>=) result f = Result.bind f result
     let (>=>) f g a = f a >>= g
     let (<!>) result f = Result.map f result
-    let (<*>) = apply
+    let (<*>) = Result.apply
 
 // computation expression
 type ResultBuilder() = 
