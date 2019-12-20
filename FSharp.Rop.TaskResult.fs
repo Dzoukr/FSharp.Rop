@@ -33,7 +33,7 @@ module TaskResult =
             | Error e -> return (Error e)
         }
 
-module Operators =
-    let (>>=) result f = bind f result
-    let (<!>) result f = bind (f >> Ok >> Task.FromResult) result
-    let (<*>) = apply
+    module Operators =
+        let (>>=) result f = bind f result
+        let (<!>) result f = bind (f >> Ok >> Task.FromResult) result
+        let (<*>) = apply
