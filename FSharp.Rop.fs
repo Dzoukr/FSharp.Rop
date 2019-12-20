@@ -75,12 +75,12 @@ module Result =
         result |> fn
         result
 
-    module Operators =
-        // custom operators
-        let (>>=) result f = Result.bind f result
-        let (>=>) f g a = f a >>= g
-        let (<!>) result f = Result.map f result
-        let (<*>) = apply
+module Operators =
+    // custom operators
+    let (>>=) result f = Result.bind f result
+    let (>=>) f g a = f a >>= g
+    let (<!>) result f = Result.map f result
+    let (<*>) = apply
 
 // computation expression
 type ResultBuilder() = 
