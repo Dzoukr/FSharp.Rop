@@ -14,7 +14,9 @@ module TaskResult =
                 return Ok r
             | Error e -> return Error e
         }
-
+    
+    let ofResult (res:Result<_,_>) = task { return res }
+    
     let bind (f:'a -> Task<Result<'b,_>>) (result:Task<Result<'a,_>>) = 
         task {
             match! result with
