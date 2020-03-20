@@ -77,9 +77,10 @@ module Result =
 
 module Operators =
     // custom operators
-    let (>>=) result f = Result.bind f result
+    let (>>=) x f = Result.bind f x
     let (>=>) f g a = f a >>= g
-    let (<!>) result f = Result.map f result
+    let (<!>) = Result.map
+    let (|>>) x f = Result.map f x
     let (<*>) = Result.apply
 
 // computation expression
